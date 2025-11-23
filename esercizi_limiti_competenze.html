@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizi sui Limiti di Funzioni - Soluzioni Interattive</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+
+        .exercise {
+            margin-bottom: 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .exercise:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .exercise-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .exercise-header:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #65408b 100%);
+        }
+
+        .exercise-number {
+            font-weight: bold;
+            font-size: 1.2em;
+            min-width: 80px;
+        }
+
+        .exercise-text {
+            flex-grow: 1;
+            margin-left: 15px;
+            font-size: 1.05em;
+        }
+
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .solution {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: #f9f9f9;
+        }
+
+        .solution.show {
+            max-height: 5000px;
+        }
+
+        .solution-content {
+            padding: 25px;
+        }
+
+        .step {
+            margin-bottom: 20px;
+            padding: 18px;
+            background: white;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .math-block {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 12px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .explanation {
+            color: #555;
+            margin-top: 10px;
+            padding: 10px;
+            background: #fef9e7;
+            border-left: 3px solid #f39c12;
+            border-radius: 3px;
+        }
+
+        .note {
+            background: #e8f5e9;
+            padding: 12px;
+            border-left: 3px solid #4caf50;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+
+        .warning {
+            background: #ffebee;
+            padding: 12px;
+            border-left: 3px solid #f44336;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+
+        .graph-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .result {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .exercise-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .exercise-text {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Limiti di Funzioni</h1>
+        <p class="subtitle">Capitolo 16 - Esercizi Svolti con Spiegazioni Dettagliate</p>
+
+        <!-- Esercizio 20 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(20)">
+                <span class="exercise-number">Es. 20</span>
+                <span class="exercise-text">Osservando il grafico, completare: $\lim_{x \to -\infty} f(x) = \_\_$; $\lim_{x \to 0^-} f(x) = \_\_$; $\lim_{x \to 0^+} f(x) = \_\_$; $\lim_{x \to 1^-} f(x) = \_\_$; $\lim_{x \to 1^+} f(x) = -\infty$; $\lim_{x \to +\infty} f(x) = \_\_$</span>
+                <span class="toggle-icon" id="icon-20">▼</span>
+            </div>
+            <div class="solution" id="solution-20">
+                <div class="solution-content">
+                    <img src="graph_es20.png" alt="Grafico funzione esercizio 20" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">📈 Analisi del grafico</div>
+                        <p>Per determinare i limiti, dobbiamo osservare il comportamento della funzione in vari punti:</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Limite per $x \to -\infty$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to -\infty} f(x) = \frac{1}{2}$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Osservando il grafico a sinistra, vediamo che la funzione si avvicina asintoticamente alla retta orizzontale $y = \frac{1}{2}$ quando $x$ tende a $-\infty$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Limite sinistro per $x \to 0^-$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^-} f(x) = -\infty$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Avvicinandoci a $x = 0$ da sinistra (valori negativi), la funzione decresce illimitatamente verso il basso. C'è un asintoto verticale in $x = 0$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Limite destro per $x \to 0^+$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^+} f(x) = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Avvicinandoci a $x = 0$ da destra (valori positivi), la funzione cresce illimitatamente verso l'alto.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Limite sinistro per $x \to 1^-$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 1^-} f(x) = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Avvicinandoci a $x = 1$ da sinistra, la funzione cresce illimitatamente. C'è un asintoto verticale in $x = 1$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">5️⃣ Limite per $x \to +\infty$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to +\infty} f(x) = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Osservando il grafico a destra, dopo $x = 3$ la funzione cresce indefinitamente.
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>📌 Nota importante:</strong> Quando ci sono asintoti verticali, è fondamentale distinguere tra limiti sinistro e destro, perché possono essere diversi (come in $x = 0$ e $x = 1$).
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Riepilogo completo:</strong><br>
+                        $\lim_{x \to -\infty} f(x) = \frac{1}{2}$;
+                        $\lim_{x \to 0^-} f(x) = -\infty$;
+                        $\lim_{x \to 0^+} f(x) = +\infty$;
+                        $\lim_{x \to 1^-} f(x) = +\infty$;
+                        $\lim_{x \to 1^+} f(x) = -\infty$;
+                        $\lim_{x \to +\infty} f(x) = +\infty$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 21 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(21)">
+                <span class="exercise-number">Es. 21</span>
+                <span class="exercise-text">Dal grafico della funzione $y = f(x)$ deduci, se esistono, i limiti indicati: a. $\lim_{x \to 0^-} f(x)$; b. $\lim_{x \to 1^-} f(x)$; c. $\lim_{x \to 1^+} f(x)$; d. $\lim_{x \to 3^-} f(x)$; e. $\lim_{x \to 3^+} f(x)$; f. $\lim_{x \to +\infty} f(x)$</span>
+                <span class="toggle-icon" id="icon-21">▼</span>
+            </div>
+            <div class="solution" id="solution-21">
+                <div class="solution-content">
+                    <img src="graph_es21.png" alt="Grafico funzione esercizio 21" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">a. $\lim_{x \to 0^-} f(x)$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^-} f(x) = 1$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Osservando il grafico, quando $x$ si avvicina a 0 da sinistra, la funzione tende al valore $y = 1$ (c'è un pallino pieno in $(0, 1)$ sul ramo sinistro).
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">b. $\lim_{x \to 1^-} f(x)$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 1^-} f(x) = 0$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Avvicinandosi a $x = 1$ da sinistra, la funzione scende verso $y = 0$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">c. $\lim_{x \to 1^+} f(x)$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 1^+} f(x) = 0$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Avvicinandosi a $x = 1$ da destra, la funzione risale partendo da un minimo locale verso $y = 0$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">d. $\lim_{x \to 3^-} f(x)$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 3^-} f(x) = 0$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Dal grafico, avvicinandosi a $x = 3$ da sinistra (dopo il massimo locale), la funzione scende verso $y = 0$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">e. $\lim_{x \to 3^+} f(x)$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 3^+} f(x) = 0$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Avvicinandosi a $x = 3$ da destra, la funzione continua dal valore vicino a 0.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">f. $\lim_{x \to +\infty} f(x)$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to +\infty} f(x) = 1$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Spiegazione:</strong> Per $x \to +\infty$, la funzione si avvicina asintoticamente alla retta orizzontale $y = 1$ (asintoto orizzontale).
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>📌 Osservazione:</strong> In questo esercizio, tutti i limiti esistono e sono finiti. Non ci sono asintoti verticali, solo un asintoto orizzontale per $x \to +\infty$.
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Risposte:</strong> a. 1; b. 0; c. 0; d. 0; e. 0; f. 1
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 22 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(22)">
+                <span class="exercise-number">Es. 22</span>
+                <span class="exercise-text">Nella figura è rappresentato il grafico della funzione $f(x)$. Possiamo dedurre che: A. $\lim_{x \to 1^-} f(x) = -\infty$; B. $\lim_{x \to 2^+} f(x) = +\infty$; C. $\lim_{x \to 4^-} f(x) = -\infty$; D. $\lim_{x \to 4^+} f(x) = +\infty$</span>
+                <span class="toggle-icon" id="icon-22">▼</span>
+            </div>
+            <div class="solution" id="solution-22">
+                <div class="solution-content">
+                    <img src="graph_es22.png" alt="Grafico funzione esercizio 22" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">📊 Analisi delle opzioni</div>
+                        <p>Verifichiamo ciascuna affermazione osservando il grafico:</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Opzione A: $\lim_{x \to 1^-} f(x) = -\infty$</div>
+                        <div class="explanation">
+                            <strong>Verifica:</strong> Osservando $x = 1$ da sinistra, la funzione decresce verso $-\infty$. 
+                            <br><strong>✅ VERO</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Opzione B: $\lim_{x \to 2^+} f(x) = +\infty$</div>
+                        <div class="explanation">
+                            <strong>Verifica:</strong> In $x = 2$ non c'è un asintoto verticale. La funzione è continua o ha un comportamento regolare.
+                            <br><strong>❌ FALSO</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Opzione C: $\lim_{x \to 4^-} f(x) = -\infty$</div>
+                        <div class="explanation">
+                            <strong>Verifica:</strong> Avvicinandosi a $x = 4$ da sinistra, la funzione decresce verso $-\infty$.
+                            <br><strong>✅ VERO</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Opzione D: $\lim_{x \to 4^+} f(x) = +\infty$</div>
+                        <div class="explanation">
+                            <strong>Verifica:</strong> Osservando il grafico, dopo $x = 4$ la funzione cresce verso $+\infty$.
+                            <br><strong>✅ VERO</strong>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>📌 Concetto chiave:</strong> Quando c'è un asintoto verticale, i limiti sinistro e destro possono essere diversi. In questo caso, in $x = 4$ abbiamo $\lim_{x \to 4^-} f(x) = -\infty$ e $\lim_{x \to 4^+} f(x) = +\infty$.
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Affermazioni vere:</strong> A, C, D
+                        <br>❌ <strong>Affermazione falsa:</strong> B
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 23 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(23)">
+                <span class="exercise-number">Es. 23</span>
+                <span class="exercise-text">Disegna il grafico di una funzione $y = f(x)$ che soddisfi le condizioni date: $D = \mathbb{R} - \{0, 2\}$; $f(-1) = 0$; $\gamma > 0$ per $-1 < x < 0 \vee x > 2$; $\lim_{x \to 0^-} f(x) = -\infty$; $\lim_{x \to 0^+} f(x) = +\infty$; $\lim_{x \to 2^-} f(x) = 0$; $\lim_{x \to 2^+} f(x) = -\infty$; $\lim_{x \to +\infty} f(x) = +\infty$</span>
+                <span class="toggle-icon" id="icon-23">▼</span>
+            </div>
+            <div class="solution" id="solution-23">
+                <div class="solution-content">
+                    <div class="step">
+                        <div class="step-title">📋 Analisi delle condizioni</div>
+                        <p>Dobbiamo costruire un grafico che rispetti tutte le condizioni date. Analizziamole una per una:</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Dominio: $D = \mathbb{R} - \{0, 2\}$</div>
+                        <div class="explanation">
+                            La funzione è definita per tutti i valori reali <strong>tranne</strong> $x = 0$ e $x = 2$. Questi sono punti di discontinuità (probabilmente asintoti verticali).
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Punto noto: $f(-1) = 0$</div>
+                        <div class="explanation">
+                            La funzione passa per il punto $(-1, 0)$, cioè interseca l'asse $x$ in $x = -1$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Segno: $f(x) > 0$ per $-1 < x < 0$ oppure $x > 2$</div>
+                        <div class="explanation">
+                            La funzione è <strong>positiva</strong> (sopra l'asse x) in due intervalli:
+                            <ul>
+                                <li>Tra $x = -1$ e $x = 0$</li>
+                                <li>Per $x > 2$</li>
+                            </ul>
+                            Quindi sarà <strong>negativa</strong> per $x < -1$ e per $0 < x < 2$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Comportamento in $x = 0$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^-} f(x) = -\infty \quad \text{e} \quad \lim_{x \to 0^+} f(x) = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            In $x = 0$ c'è un <strong>asintoto verticale</strong>:
+                            <ul>
+                                <li>Da sinistra la funzione scende verso $-\infty$</li>
+                                <li>Da destra la funzione sale verso $+\infty$</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">5️⃣ Comportamento in $x = 2$</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 2^-} f(x) = 0 \quad \text{e} \quad \lim_{x \to 2^+} f(x) = -\infty$$
+                        </div>
+                        <div class="explanation">
+                            In $x = 2$:
+                            <ul>
+                                <li>Da sinistra la funzione si avvicina a 0 (toccando l'asse x)</li>
+                                <li>Da destra c'è un asintoto verticale verso $-\infty$</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">6️⃣ Comportamento all'infinito</div>
+                        <div class="math-block">
+                            $$\lim_{x \to +\infty} f(x) = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            Per $x \to +\infty$, la funzione cresce indefinitamente.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">✏️ Costruzione del grafico</div>
+                        <div class="explanation">
+                            <strong>Passo per passo:</strong>
+                            <ol>
+                                <li>Segna i punti $x = 0$ e $x = 2$ come asintoti verticali (linee tratteggiate)</li>
+                                <li>Segna il punto $(-1, 0)$</li>
+                                <li>Per $x < -1$: funzione negativa</li>
+                                <li>Per $-1 < x < 0$: funzione positiva che va da 0 a $-\infty$ (avvicinandosi a $x=0$)</li>
+                                <li>Per $0 < x < 2$: funzione che parte da $+\infty$ (a destra di 0), diventa negativa e si avvicina a 0 in $x = 2$</li>
+                                <li>Per $x > 2$: funzione che parte da $-\infty$ (a destra di 2), diventa positiva e cresce verso $+\infty$</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Suggerimento:</strong> Un esempio di funzione che soddisfa queste condizioni potrebbe essere del tipo:
+                        $$f(x) = \frac{(x+1)(x-a)}{x(x-2)}$$
+                        dove $a$ è una costante opportuna.
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Errore comune:</strong> Non dimenticare che la funzione deve essere positiva per $-1 < x < 0$, anche se tende a $-\infty$ per $x \to 0^-$.
+                    </div>
+
+                    <div class="result">
+                        ✅ Il grafico deve avere:
+                        <ul>
+                            <li>2 asintoti verticali in $x = 0$ e $x = 2$</li>
+                            <li>Passaggio per $(-1, 0)$</li>
+                            <li>Comportamento crescente per $x \to +\infty$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 24 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(24)">
+                <span class="exercise-number">Es. 24</span>
+                <span class="exercise-text">Disegna il grafico di una funzione $y = f(x)$ che soddisfi le condizioni date: $D = \mathbb{R} - \{0\}$; $f(-2) = 0$; $\gamma < 0$ per $x < -2$; $\lim_{x \to 0^-} f(x) = +\infty$; $\lim_{x \to 0^+} f(x) = +\infty$; $\lim_{x \to +\infty} f(x) = 0^+$; $\lim_{x \to -\infty} f(x) = +\infty$</span>
+                <span class="toggle-icon" id="icon-24">▼</span>
+            </div>
+            <div class="solution" id="solution-24">
+                <div class="solution-content">
+                    <div class="step">
+                        <div class="step-title">📋 Analisi delle condizioni</div>
+                        <p>Costruiamo il grafico rispettando le condizioni:</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Dominio: $D = \mathbb{R} - \{0\}$</div>
+                        <div class="explanation">
+                            La funzione non è definita in $x = 0$. Questo sarà un punto di discontinuità.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Punto e segno</div>
+                        <div class="explanation">
+                            <ul>
+                                <li>$f(-2) = 0$: la funzione passa per $(-2, 0)$</li>
+                                <li>$f(x) < 0$ per $x < -2$: la funzione è negativa a sinistra di $x = -2$</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Comportamento in $x = 0$ (asintoto verticale)</div>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^-} f(x) = +\infty \quad \text{e} \quad \lim_{x \to 0^+} f(x) = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            In $x = 0$ c'è un asintoto verticale, ma con una particolarità: sia da sinistra che da destra la funzione tende a $+\infty$. Questo crea un "picco" verso l'alto.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Comportamento agli estremi del dominio</div>
+                        <div class="math-block">
+                            $$\lim_{x \to -\infty} f(x) = +\infty$$
+                        </div>
+                        <div class="math-block">
+                            $$\lim_{x \to +\infty} f(x) = 0^+$$
+                        </div>
+                        <div class="explanation">
+                            <ul>
+                                <li>Per $x \to -\infty$: la funzione cresce verso $+\infty$</li>
+                                <li>Per $x \to +\infty$: la funzione si avvicina a 0 rimanendo positiva (asintoto orizzontale $y = 0$)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">✏️ Costruzione del grafico</div>
+                        <div class="explanation">
+                            <strong>Ramo sinistro ($x < 0$):</strong>
+                            <ol>
+                                <li>Per $x \to -\infty$: parte da $+\infty$</li>
+                                <li>Scende e diventa negativa per $x < -2$</li>
+                                <li>Passa per $(-2, 0)$</li>
+                                <li>Diventa positiva per $-2 < x < 0$</li>
+                                <li>Tende a $+\infty$ per $x \to 0^-$</li>
+                            </ol>
+                            
+                            <strong>Ramo destro ($x > 0$):</strong>
+                            <ol>
+                                <li>Parte da $+\infty$ per $x \to 0^+$</li>
+                                <li>Scende e si avvicina asintoticamente a $y = 0$ per $x \to +\infty$</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Esempio:</strong> Una funzione che potrebbe soddisfare queste condizioni è del tipo:
+                        $$f(x) = \frac{(x+2)^2}{x^2} \quad \text{per } x \neq 0$$
+                        Questa ha le proprietà richieste.
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Attenzione:</strong> Il fatto che entrambi i limiti in $x = 0$ siano $+\infty$ è particolare. Significa che non c'è un "salto" tra $-\infty$ e $+\infty$ come negli esercizi precedenti.
+                    </div>
+
+                    <div class="result">
+                        ✅ Caratteristiche del grafico:
+                        <ul>
+                            <li>Asintoto verticale in $x = 0$ (con limite $+\infty$ da entrambi i lati)</li>
+                            <li>Asintoto orizzontale $y = 0$ per $x \to +\infty$</li>
+                            <li>Zero in $x = -2$</li>
+                            <li>Funzione negativa solo per $x < -2$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 25 (Vero o Falso) -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(25)">
+                <span class="exercise-number">Es. 25</span>
+                <span class="exercise-text">VERO o FALSO? Osserva il grafico della funzione $f(x)$: a. $\lim_{x \to 0^-} f(x) = +\infty$; b. $\lim_{x \to 0^+} f(x) = 1^+$; c. $\lim_{x \to 2^-} f(x) = 1^-$; d. $\lim_{x \to 2^+} f(x) = -\infty$</span>
+                <span class="toggle-icon" id="icon-25">▼</span>
+            </div>
+            <div class="solution" id="solution-25">
+                <div class="solution-content">
+                    <img src="graph_es25.png" alt="Grafico funzione esercizio 25" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">a. $\lim_{x \to 0^-} f(x) = +\infty$</div>
+                        <div class="explanation">
+                            Osservando il grafico, avvicinandosi a $x = 0$ da sinistra, la funzione cresce verso $+\infty$.
+                            <br><strong>✅ VERO</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">b. $\lim_{x \to 0^+} f(x) = 1^+$</div>
+                        <div class="explanation">
+                            Avvicinandosi a $x = 0$ da destra, la funzione si avvicina a 1 dall'alto (rimanendo leggermente sopra 1).
+                            <br><strong>✅ VERO</strong>
+                            <br><br>
+                            <strong>Nota:</strong> La notazione $1^+$ significa "1 con valori leggermente maggiori di 1".
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">c. $\lim_{x \to 2^-} f(x) = 1^-$</div>
+                        <div class="explanation">
+                            Avvicinandosi a $x = 2$ da sinistra, la funzione si avvicina a 1 dal basso (rimanendo leggermente sotto 1).
+                            <br><strong>❌ FALSO</strong>
+                            <br><br>
+                            Dal grafico si vede che il limite è esattamente 1, non $1^-$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">d. $\lim_{x \to 2^+} f(x) = -\infty$</div>
+                        <div class="explanation">
+                            Osservando il grafico dopo $x = 2$, la funzione scende bruscamente verso $-\infty$.
+                            <br><strong>✅ VERO</strong>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>📌 Notazione importante:</strong>
+                        <ul>
+                            <li>$L^+$ significa "si avvicina a $L$ rimanendo leggermente sopra"</li>
+                            <li>$L^-$ significa "si avvicina a $L$ rimanendo leggermente sotto"</li>
+                        </ul>
+                        Questa notazione è utile per descrivere con precisione il comportamento della funzione.
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Risposte:</strong> a. V; b. V; c. F; d. V
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 26 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(26)">
+                <span class="exercise-number">Es. 26</span>
+                <span class="exercise-text">Rappresenta graficamente le funzioni utilizzando le trasformazioni geometriche. Deduci poi dal grafico i limiti indicati: $f(x) = \frac{1}{|x|}$; $\lim_{x \to 0^-} f(x)$, $\lim_{x \to 0^+} f(x)$</span>
+                <span class="toggle-icon" id="icon-26">▼</span>
+            </div>
+            <div class="solution" id="solution-26">
+                <div class="solution-content">
+                    <div class="step">
+                        <div class="step-title">📐 Analisi della funzione</div>
+                        <div class="math-block">
+                            $$f(x) = \frac{1}{|x|}$$
+                        </div>
+                        <div class="explanation">
+                            Questa funzione si ottiene dalla funzione base $y = \frac{1}{x}$ applicando il valore assoluto al denominatore.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Funzione base: $g(x) = \frac{1}{x}$</div>
+                        <div class="explanation">
+                            La funzione $g(x) = \frac{1}{x}$ (iperbole equilatera) ha:
+                            <ul>
+                                <li>Asintoto verticale in $x = 0$</li>
+                                <li>Asintoto orizzontale $y = 0$</li>
+                                <li>Per $x > 0$: ramo nel primo quadrante</li>
+                                <li>Per $x < 0$: ramo nel terzo quadrante</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Applicazione del valore assoluto</div>
+                        <div class="explanation">
+                            Quando scriviamo $f(x) = \frac{1}{|x|}$, dobbiamo distinguere:
+                            <ul>
+                                <li>Se $x > 0$: $|x| = x$, quindi $f(x) = \frac{1}{x}$</li>
+                                <li>Se $x < 0$: $|x| = -x$, quindi $f(x) = \frac{1}{-x} = -\frac{1}{x}$</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="math-block">
+                            $$f(x) = \begin{cases}
+                            \frac{1}{x} & \text{se } x > 0 \\
+                            \frac{1}{-x} = -\frac{1}{x} & \text{se } x < 0
+                            \end{cases}$$
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Trasformazione geometrica</div>
+                        <div class="explanation">
+                            Il valore assoluto $|x|$ provoca una <strong>riflessione</strong>:
+                            <ul>
+                                <li>Il ramo per $x > 0$ rimane invariato (primo quadrante)</li>
+                                <li>Il ramo per $x < 0$ viene riflesso rispetto all'asse $y$, quindi passa dal terzo al secondo quadrante</li>
+                            </ul>
+                            Il risultato è una funzione <strong>pari</strong> (simmetrica rispetto all'asse $y$), sempre positiva.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Calcolo dei limiti</div>
+                        
+                        <div class="math-block">
+                            $$\lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} \frac{1}{|x|} = \lim_{x \to 0^-} \frac{1}{-x} = +\infty$$
+                        </div>
+                        
+                        <div class="explanation">
+                            Quando $x \to 0^-$ (cioè $x$ si avvicina a 0 da sinistra con valori negativi):
+                            <ul>
+                                <li>$|x| = -x$ (perché $x < 0$)</li>
+                                <li>$-x$ tende a $0^+$ (valore positivo piccolo)</li>
+                                <li>$\frac{1}{-x} \to +\infty$</li>
+                            </ul>
+                        </div>
+
+                        <div class="math-block">
+                            $$\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} \frac{1}{|x|} = \lim_{x \to 0^+} \frac{1}{x} = +\infty$$
+                        </div>
+                        
+                        <div class="explanation">
+                            Quando $x \to 0^+$ (cioè $x$ si avvicina a 0 da destra con valori positivi):
+                            <ul>
+                                <li>$|x| = x$ (perché $x > 0$)</li>
+                                <li>$x$ tende a $0^+$</li>
+                                <li>$\frac{1}{x} \to +\infty$</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Caratteristica importante:</strong> A differenza di $f(x) = \frac{1}{x}$ che ha limiti diversi a sinistra ($-\infty$) e a destra ($+\infty$) di 0, la funzione $f(x) = \frac{1}{|x|}$ ha lo stesso limite ($+\infty$) da entrambi i lati.
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Errore comune:</strong> Non confondere $\frac{1}{|x|}$ con $|\frac{1}{x}|$. Anche se in questo caso danno lo stesso risultato, il procedimento concettuale è diverso.
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Risposte:</strong>
+                        <br>$\lim_{x \to 0^-} f(x) = +\infty$
+                        <br>$\lim_{x \to 0^+} f(x) = +\infty$
+                        <br><br>
+                        Il grafico è simmetrico rispetto all'asse $y$, con entrambi i rami nel semipiano superiore, tendenti a $+\infty$ in $x = 0$.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 27 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(27)">
+                <span class="exercise-number">Es. 27</span>
+                <span class="exercise-text">Rappresenta graficamente la funzione $f(x) = 1 - \ln x$ e deduci: $\lim_{x \to 0^+} f(x)$, $\lim_{x \to 1^-} f(x)$, $\lim_{x \to 1^+} f(x)$</span>
+                <span class="toggle-icon" id="icon-27">▼</span>
+            </div>
+            <div class="solution" id="solution-27">
+                <div class="solution-content">
+                    <div class="step">
+                        <div class="step-title">📐 Costruzione del grafico per trasformazioni</div>
+                        <div class="math-block">
+                            $$f(x) = 1 - \ln x$$
+                        </div>
+                        <div class="explanation">
+                            Partiremo dalla funzione base $y = \ln x$ e applicheremo le trasformazioni necessarie.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Funzione base: $g(x) = \ln x$</div>
+                        <div class="explanation">
+                            La funzione logaritmo naturale $y = \ln x$ ha le seguenti proprietà:
+                            <ul>
+                                <li><strong>Dominio:</strong> $x > 0$ (solo valori positivi)</li>
+                                <li>Passa per il punto $(1, 0)$ perché $\ln 1 = 0$</li>
+                                <li>$\lim_{x \to 0^+} \ln x = -\infty$ (asintoto verticale in $x = 0$)</li>
+                                <li>$\lim_{x \to +\infty} \ln x = +\infty$ (cresce indefinitamente ma lentamente)</li>
+                                <li>Funzione crescente su tutto il dominio</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Prima trasformazione: $h(x) = -\ln x$</div>
+                        <div class="explanation">
+                            Il segno meno davanti al logaritmo provoca una <strong>riflessione rispetto all'asse x</strong>:
+                            <ul>
+                                <li>Il punto $(1, 0)$ rimane invariato</li>
+                                <li>Per $x \to 0^+$: $-\ln x \to +\infty$ (ora va verso l'alto)</li>
+                                <li>Per $x \to +\infty$: $-\ln x \to -\infty$ (ora va verso il basso)</li>
+                                <li>Funzione <strong>decrescente</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Seconda trasformazione: $f(x) = 1 - \ln x$</div>
+                        <div class="explanation">
+                            Aggiungere 1 provoca una <strong>traslazione verticale di 1 unità verso l'alto</strong>:
+                            <ul>
+                                <li>Il punto $(1, 0)$ si sposta in $(1, 1)$</li>
+                                <li>L'asintoto verticale rimane in $x = 0$</li>
+                                <li>Tutti i valori della funzione aumentano di 1</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="math-block">
+                            $$f(x) = 1 + (-\ln x) = 1 - \ln x$$
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Calcolo dei limiti</div>
+                        
+                        <strong>a) $\lim_{x \to 0^+} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^+} (1 - \ln x) = 1 - \lim_{x \to 0^+} \ln x = 1 - (-\infty) = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            Quando $x$ si avvicina a 0 da destra, $\ln x \to -\infty$, quindi $-\ln x \to +\infty$ e $1 - \ln x \to +\infty$.
+                        </div>
+
+                        <strong>b) $\lim_{x \to 1^-} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 1^-} (1 - \ln x) = 1 - \ln 1 = 1 - 0 = 1$$
+                        </div>
+                        <div class="explanation">
+                            La funzione è continua in $x = 1$. Avvicinandosi da sinistra, il limite è semplicemente $f(1) = 1$.
+                        </div>
+
+                        <strong>c) $\lim_{x \to 1^+} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 1^+} (1 - \ln x) = 1 - \ln 1 = 1 - 0 = 1$$
+                        </div>
+                        <div class="explanation">
+                            Anche da destra il limite è 1. La funzione è continua in $x = 1$, quindi i limiti sinistro e destro coincidono con il valore della funzione.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">📊 Punti notevoli del grafico</div>
+                        <div class="explanation">
+                            <ul>
+                                <li><strong>Intersezione con asse $y$:</strong> Non esiste (dominio $x > 0$)</li>
+                                <li><strong>Intersezione con asse $x$:</strong> $1 - \ln x = 0 \Rightarrow \ln x = 1 \Rightarrow x = e$, punto $(e, 0)$</li>
+                                <li><strong>Punto particolare:</strong> $(1, 1)$</li>
+                                <li><strong>Asintoto verticale:</strong> $x = 0$</li>
+                                <li><strong>Comportamento:</strong> Funzione decrescente</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Verifica:</strong> 
+                        <ul>
+                            <li>Per $x = 1$: $f(1) = 1 - \ln 1 = 1 - 0 = 1$ ✓</li>
+                            <li>Per $x = e$: $f(e) = 1 - \ln e = 1 - 1 = 0$ ✓</li>
+                            <li>Per $x = e^2$: $f(e^2) = 1 - \ln e^2 = 1 - 2 = -1$ ✓</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Attenzione al dominio:</strong> La funzione $f(x) = 1 - \ln x$ è definita solo per $x > 0$. Non ha senso calcolare limiti per $x \to 0^-$ o $x \to -\infty$.
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Risposte:</strong>
+                        <br>• $\lim_{x \to 0^+} f(x) = +\infty$
+                        <br>• $\lim_{x \to 1^-} f(x) = 1$
+                        <br>• $\lim_{x \to 1^+} f(x) = 1$
+                        <br><br>
+                        Il grafico è una curva decrescente con asintoto verticale in $x = 0$, che passa per $(1, 1)$ e $(e, 0)$.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 28 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(28)">
+                <span class="exercise-number">Es. 28</span>
+                <span class="exercise-text">Rappresenta graficamente la funzione $f(x) = e^x - 1$ e deduci: $\lim_{x \to -\infty} f(x)$, $\lim_{x \to 0^-} f(x)$, $\lim_{x \to 0^+} f(x)$</span>
+                <span class="toggle-icon" id="icon-28">▼</span>
+            </div>
+            <div class="solution" id="solution-28">
+                <div class="solution-content">
+                    <div class="step">
+                        <div class="step-title">📐 Costruzione del grafico</div>
+                        <div class="math-block">
+                            $$f(x) = e^x - 1$$
+                        </div>
+                        <div class="explanation">
+                            Partiremo dalla funzione esponenziale base $y = e^x$ e applicheremo una traslazione.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Funzione base: $g(x) = e^x$</div>
+                        <div class="explanation">
+                            La funzione esponenziale $y = e^x$ ha le seguenti proprietà fondamentali:
+                            <ul>
+                                <li><strong>Dominio:</strong> $\mathbb{R}$ (tutti i numeri reali)</li>
+                                <li><strong>Codominio:</strong> $(0, +\infty)$ (solo valori positivi)</li>
+                                <li>Passa per il punto $(0, 1)$ perché $e^0 = 1$</li>
+                                <li>$\lim_{x \to -\infty} e^x = 0$ (asintoto orizzontale $y = 0$)</li>
+                                <li>$\lim_{x \to +\infty} e^x = +\infty$ (cresce molto rapidamente)</li>
+                                <li>Funzione sempre crescente</li>
+                                <li>Mai negativa: $e^x > 0$ per ogni $x$</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Trasformazione: $f(x) = e^x - 1$</div>
+                        <div class="explanation">
+                            Sottrarre 1 provoca una <strong>traslazione verticale di 1 unità verso il basso</strong>:
+                            <ul>
+                                <li>Il punto $(0, 1)$ si sposta in $(0, 0)$: $f(0) = e^0 - 1 = 1 - 1 = 0$</li>
+                                <li>L'asintoto orizzontale $y = 0$ si sposta in $y = -1$</li>
+                                <li>La funzione rimane crescente</li>
+                                <li>Ora la funzione può assumere valori negativi (per $x < 0$)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Calcolo dei limiti</div>
+                        
+                        <strong>a) $\lim_{x \to -\infty} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to -\infty} (e^x - 1) = \lim_{x \to -\infty} e^x - 1 = 0 - 1 = -1$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Ragionamento:</strong>
+                            <ul>
+                                <li>Quando $x \to -\infty$, abbiamo $e^x \to 0$</li>
+                                <li>Quindi $e^x - 1 \to 0 - 1 = -1$</li>
+                                <li>La retta $y = -1$ è un <strong>asintoto orizzontale</strong> per $x \to -\infty$</li>
+                            </ul>
+                        </div>
+
+                        <strong>b) $\lim_{x \to 0^-} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^-} (e^x - 1) = e^0 - 1 = 1 - 1 = 0$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Ragionamento:</strong>
+                            <ul>
+                                <li>La funzione $f(x) = e^x - 1$ è continua in tutto $\mathbb{R}$</li>
+                                <li>Quindi il limite per $x \to 0^-$ è uguale al valore della funzione in 0</li>
+                                <li>$f(0) = e^0 - 1 = 0$</li>
+                            </ul>
+                        </div>
+
+                        <strong>c) $\lim_{x \to 0^+} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 0^+} (e^x - 1) = e^0 - 1 = 1 - 1 = 0$$
+                        </div>
+                        <div class="explanation">
+                            <strong>Ragionamento:</strong> Stesso discorso del limite sinistro. Per la continuità:
+                            $$\lim_{x \to 0^-} f(x) = f(0) = \lim_{x \to 0^+} f(x) = 0$$
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">📊 Punti notevoli e caratteristiche</div>
+                        <div class="explanation">
+                            <ul>
+                                <li><strong>Intersezione con asse $x$:</strong> $(0, 0)$ (zero della funzione)</li>
+                                <li><strong>Intersezione con asse $y$:</strong> $(0, 0)$ (stesso punto)</li>
+                                <li><strong>Segno:</strong> 
+                                    <ul>
+                                        <li>$f(x) < 0$ per $x < 0$ (sotto l'asse $x$)</li>
+                                        <li>$f(x) = 0$ per $x = 0$</li>
+                                        <li>$f(x) > 0$ per $x > 0$ (sopra l'asse $x$)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Asintoto orizzontale:</strong> $y = -1$ per $x \to -\infty$</li>
+                                <li><strong>Crescita:</strong> Sempre crescente</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">🔍 Verifica con alcuni valori</div>
+                        <div class="explanation">
+                            <ul>
+                                <li>$x = -2$: $f(-2) = e^{-2} - 1 \approx 0.135 - 1 = -0.865$ ✓ (negativo)</li>
+                                <li>$x = 0$: $f(0) = e^0 - 1 = 0$ ✓</li>
+                                <li>$x = 1$: $f(1) = e^1 - 1 = e - 1 \approx 1.718$ ✓ (positivo)</li>
+                                <li>$x = 2$: $f(2) = e^2 - 1 \approx 7.389 - 1 = 6.389$ ✓ (cresce rapidamente)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Relazione importante:</strong> La funzione $f(x) = e^x - 1$ è molto usata in matematica. Per valori piccoli di $x$, vale l'approssimazione:
+                        $$e^x - 1 \approx x \quad \text{per } x \approx 0$$
+                        Questo è utile nello studio dei limiti notevoli.
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Non confondere:</strong> 
+                        <ul>
+                            <li>$e^x - 1$ (la nostra funzione)</li>
+                            <li>$e^{x-1}$ (esponenziale con traslazione nell'esponente)</li>
+                        </ul>
+                        Sono funzioni completamente diverse!
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Risposte:</strong>
+                        <br>• $\lim_{x \to -\infty} f(x) = -1$
+                        <br>• $\lim_{x \to 0^-} f(x) = 0$
+                        <br>• $\lim_{x \to 0^+} f(x) = 0$
+                        <br><br>
+                        Il grafico è una curva crescente che passa per l'origine, con asintoto orizzontale $y = -1$ per $x \to -\infty$ e che cresce indefinitamente per $x \to +\infty$.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 30 (LEGGI IL GRAFICO) -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(30)">
+                <span class="exercise-number">Es. 30</span>
+                <span class="exercise-text">Nel grafico è rappresentata la funzione $f(x) = \begin{cases} e^x + a & \text{se } x < 1 \\ \frac{1}{x-b} & \text{se } x \geq 1 \end{cases}$. Trova $a$ e $b$. Deduci dal grafico i seguenti limiti: $\lim_{x \to -\infty} f(x)$, $\lim_{x \to 1^-} f(x)$, $\lim_{x \to 1^+} f(x)$, $\lim_{x \to 3^-} f(x)$, $\lim_{x \to +\infty} f(x)$. [a = -3; b = 1]</span>
+                <span class="toggle-icon" id="icon-30">▼</span>
+            </div>
+            <div class="solution" id="solution-30">
+                <div class="solution-content">
+                    <img src="graph_es30.png" alt="Grafico funzione esercizio 30" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">🔍 Determinazione dei parametri $a$ e $b$</div>
+                        <div class="explanation">
+                            Dobbiamo trovare i valori di $a$ e $b$ osservando il grafico.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Determinazione di $a$</div>
+                        <div class="explanation">
+                            <strong>Osservazione dal grafico:</strong> Per $x \to -\infty$, la funzione si avvicina asintoticamente a $y = -3$.
+                            <br><br>
+                            <strong>Analisi teorica:</strong>
+                            <ul>
+                                <li>Per $x < 1$: $f(x) = e^x + a$</li>
+                                <li>Quando $x \to -\infty$: $e^x \to 0$</li>
+                                <li>Quindi: $\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} (e^x + a) = 0 + a = a$</li>
+                            </ul>
+                            
+                            Dal grafico vediamo che questo limite è $-3$, quindi:
+                        </div>
+                        <div class="math-block">
+                            $$a = -3$$
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Determinazione di $b$</div>
+                        <div class="explanation">
+                            <strong>Osservazione dal grafico:</strong> La funzione ha un asintoto verticale che sembra essere in $x = 1$.
+                            <br><br>
+                            <strong>Verifica con i limiti in $x = 1$:</strong>
+                            <ul>
+                                <li>Limite sinistro: $\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (e^x - 3) = e^1 - 3 = e - 3 \approx -0.28$</li>
+                                <li>Limite destro: $\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} \frac{1}{x-b}$</li>
+                            </ul>
+                            
+                            Perché ci sia un asintoto verticale in $x = 1$, il denominatore deve annullarsi per $x = 1$:
+                            $$1 - b = 0 \quad \Rightarrow \quad b = 1$$
+                        </div>
+                        <div class="math-block">
+                            $$b = 1$$
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Funzione completa</div>
+                        <div class="math-block">
+                            $$f(x) = \begin{cases}
+                            e^x - 3 & \text{se } x < 1 \\
+                            \frac{1}{x-1} & \text{se } x \geq 1
+                            \end{cases}$$
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Calcolo dei limiti richiesti</div>
+                        
+                        <strong>a) $\lim_{x \to -\infty} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} (e^x - 3) = 0 - 3 = -3$$
+                        </div>
+                        <div class="explanation">
+                            Asintoto orizzontale $y = -3$ per $x \to -\infty$.
+                        </div>
+
+                        <strong>b) $\lim_{x \to 1^-} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (e^x - 3) = e^1 - 3 = e - 3 \approx -0.28$$
+                        </div>
+                        <div class="explanation">
+                            Usando la definizione per $x < 1$, calcoliamo direttamente sostituendo.
+                        </div>
+
+                        <strong>c) $\lim_{x \to 1^+} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} \frac{1}{x-1} = +\infty$$
+                        </div>
+                        <div class="explanation">
+                            Avvicinandosi a $x = 1$ da destra, $(x-1) \to 0^+$, quindi $\frac{1}{x-1} \to +\infty$.
+                        </div>
+
+                        <strong>d) $\lim_{x \to 3^-} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to 3^-} f(x) = \lim_{x \to 3^-} \frac{1}{x-1} = \frac{1}{3-1} = \frac{1}{2}$$
+                        </div>
+                        <div class="explanation">
+                            Per $x = 3 > 1$, usiamo la seconda definizione. La funzione è continua in $x = 3$, non c'è discontinuità.
+                        </div>
+
+                        <strong>e) $\lim_{x \to +\infty} f(x)$</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \frac{1}{x-1} = 0$$
+                        </div>
+                        <div class="explanation">
+                            Per $x \to +\infty$, il denominatore cresce indefinitamente, quindi la frazione tende a 0.
+                            <br>Asintoto orizzontale $y = 0$ per $x \to +\infty$.
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>📌 Funzione definita a tratti:</strong> Quando una funzione è definita con regole diverse in intervalli diversi, è fondamentale:
+                        <ul>
+                            <li>Usare la definizione corretta in base al valore di $x$</li>
+                            <li>Controllare i limiti nei punti di "cambio" (qui $x = 1$)</li>
+                            <li>Verificare se c'è continuità o discontinuità</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Attenzione:</strong> In $x = 1$ la funzione ha una discontinuità di seconda specie (salto infinito):
+                        <ul>
+                            <li>$\lim_{x \to 1^-} f(x) = e - 3 \approx -0.28$ (finito)</li>
+                            <li>$\lim_{x \to 1^+} f(x) = +\infty$ (infinito)</li>
+                        </ul>
+                        I due limiti sono diversi, quindi il limite per $x \to 1$ non esiste.
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Parametri:</strong> $a = -3$, $b = 1$
+                        <br><br>
+                        ✅ <strong>Limiti:</strong>
+                        <br>• $\lim_{x \to -\infty} f(x) = -3$
+                        <br>• $\lim_{x \to 1^-} f(x) = e - 3$
+                        <br>• $\lim_{x \to 1^+} f(x) = +\infty$
+                        <br>• $\lim_{x \to 3^-} f(x) = \frac{1}{2}$
+                        <br>• $\lim_{x \to +\infty} f(x) = 0$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 31 (Risolvere problemi) -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(31)">
+                <span class="exercise-number">Es. 31</span>
+                <span class="exercise-text">Rappresenta graficamente la funzione $f(x) = 2e^{x+1}$ e verifica graficamente e applicando la definizione che $\lim_{x \to -\infty} f(x) = 0$</span>
+                <span class="toggle-icon" id="icon-31">▼</span>
+            </div>
+            <div class="solution" id="solution-31">
+                <div class="solution-content">
+                    <div class="step">
+                        <div class="step-title">📐 Rappresentazione grafica della funzione</div>
+                        <div class="math-block">
+                            $$f(x) = 2e^{x+1}$$
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Analisi della funzione per trasformazioni</div>
+                        <div class="explanation">
+                            Partiamo dalla funzione base $g(x) = e^x$ e applichiamo le trasformazioni:
+                        </div>
+                        
+                        <strong>Prima trasformazione: $h(x) = e^{x+1}$</strong>
+                        <div class="explanation">
+                            L'argomento dell'esponenziale diventa $(x+1)$ invece di $x$.
+                            <br>Questo corrisponde a una <strong>traslazione orizzontale di 1 unità a sinistra</strong>.
+                            <ul>
+                                <li>Il punto $(0, 1)$ si sposta in $(-1, 1)$: $h(-1) = e^{-1+1} = e^0 = 1$</li>
+                                <li>L'asintoto $y = 0$ rimane invariato</li>
+                            </ul>
+                        </div>
+
+                        <strong>Seconda trasformazione: $f(x) = 2e^{x+1}$</strong>
+                        <div class="explanation">
+                            Moltiplicare per 2 provoca un <strong>dilatazione verticale di fattore 2</strong>.
+                            <ul>
+                                <li>Il punto $(-1, 1)$ diventa $(-1, 2)$: $f(-1) = 2e^0 = 2$</li>
+                                <li>L'asintoto $y = 0$ rimane invariato (moltiplicare 0 per 2 dà ancora 0)</li>
+                                <li>La funzione cresce più rapidamente</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Proprietà del grafico</div>
+                        <div class="explanation">
+                            <ul>
+                                <li><strong>Dominio:</strong> $\mathbb{R}$ (tutti i numeri reali)</li>
+                                <li><strong>Codominio:</strong> $(0, +\infty)$ (sempre positiva)</li>
+                                <li><strong>Punto notevole:</strong> $(-1, 2)$</li>
+                                <li><strong>Intersezione asse $y$:</strong> $(0, 2e) \approx (0, 5.44)$
+                                    <br>$f(0) = 2e^{0+1} = 2e$
+                                </li>
+                                <li><strong>Asintoto orizzontale:</strong> $y = 0$ per $x \to -\infty$</li>
+                                <li><strong>Crescita:</strong> Sempre crescente</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Verifica grafica di $\lim_{x \to -\infty} f(x) = 0$</div>
+                        <div class="explanation">
+                            <strong>Osservazione dal grafico:</strong>
+                            <ul>
+                                <li>Muovendoci verso sinistra (valori di $x$ sempre più negativi), il grafico si avvicina sempre di più all'asse $x$ (retta $y = 0$)</li>
+                                <li>La funzione rimane sempre positiva, ma diventa sempre più piccola</li>
+                                <li>Non tocca mai l'asse $x$, ma si avvicina indefinitamente</li>
+                            </ul>
+                            Questo conferma visivamente che $y = 0$ è un asintoto orizzontale.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Verifica mediante la definizione di limite</div>
+                        <div class="explanation">
+                            <strong>Definizione formale:</strong> $\lim_{x \to -\infty} f(x) = 0$ significa che:
+                            <br><em>Per ogni $\varepsilon > 0$, esiste un $M < 0$ tale che se $x < M$, allora $|f(x) - 0| < \varepsilon$</em>
+                        </div>
+
+                        <strong>Calcolo del limite:</strong>
+                        <div class="math-block">
+                            $$\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} 2e^{x+1}$$
+                        </div>
+
+                        <div class="explanation">
+                            Riscriviamo utilizzando le proprietà degli esponenziali:
+                        </div>
+                        <div class="math-block">
+                            $$2e^{x+1} = 2 \cdot e^x \cdot e^1 = 2e \cdot e^x$$
+                        </div>
+
+                        <div class="explanation">
+                            Quindi:
+                        </div>
+                        <div class="math-block">
+                            $$\lim_{x \to -\infty} 2e \cdot e^x = 2e \cdot \lim_{x \to -\infty} e^x = 2e \cdot 0 = 0$$
+                        </div>
+
+                        <div class="explanation">
+                            <strong>Giustificazione:</strong> Sappiamo che $\lim_{x \to -\infty} e^x = 0$ è un limite fondamentale.
+                            <br>Il fattore moltiplicativo $2e$ (che è una costante positiva) non cambia il risultato.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">5️⃣ Dimostrazione rigorosa (opzionale)</div>
+                        <div class="explanation">
+                            Vogliamo dimostrare che per ogni $\varepsilon > 0$, possiamo rendere $f(x)$ arbitrariamente piccolo.
+                            <br><br>
+                            Dobbiamo risolvere la disequazione:
+                        </div>
+                        <div class="math-block">
+                            $$2e^{x+1} < \varepsilon$$
+                        </div>
+
+                        <div class="explanation">
+                            Dividiamo per 2:
+                        </div>
+                        <div class="math-block">
+                            $$e^{x+1} < \frac{\varepsilon}{2}$$
+                        </div>
+
+                        <div class="explanation">
+                            Applichiamo il logaritmo naturale (funzione crescente):
+                        </div>
+                        <div class="math-block">
+                            $$x + 1 < \ln\left(\frac{\varepsilon}{2}\right)$$
+                        </div>
+
+                        <div class="math-block">
+                            $$x < \ln\left(\frac{\varepsilon}{2}\right) - 1$$
+                        </div>
+
+                        <div class="explanation">
+                            Quindi, scegliendo $M = \ln\left(\frac{\varepsilon}{2}\right) - 1$, abbiamo dimostrato che:
+                            <br>Se $x < M$, allora $f(x) < \varepsilon$.
+                            <br><br>
+                            Poiché per $\varepsilon \to 0^+$ abbiamo $M \to -\infty$, questo conferma che $\lim_{x \to -\infty} f(x) = 0$.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">🔢 Verifica numerica</div>
+                        <div class="explanation">
+                            Calcoliamo alcuni valori per confermare:
+                            <ul>
+                                <li>$f(-5) = 2e^{-5+1} = 2e^{-4} \approx 0.037$ ✓</li>
+                                <li>$f(-10) = 2e^{-10+1} = 2e^{-9} \approx 0.000247$ ✓</li>
+                                <li>$f(-20) = 2e^{-20+1} = 2e^{-19} \approx 0.0000001$ ✓</li>
+                            </ul>
+                            Si vede chiaramente che al diminuire di $x$, $f(x)$ si avvicina a 0.
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Concetto chiave:</strong> Le funzioni esponenziali del tipo $a \cdot e^{x+b}$ (con $a, b$ costanti positive):
+                        <ul>
+                            <li>Tendono sempre a 0 per $x \to -\infty$</li>
+                            <li>Tendono sempre a $+\infty$ per $x \to +\infty$</li>
+                            <li>Hanno sempre $y = 0$ come asintoto orizzontale (solo a sinistra)</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Differenza importante:</strong>
+                        <ul>
+                            <li>$2e^{x+1} = 2e \cdot e^x$ (moltiplicazione)</li>
+                            <li>$2e^x + 1$ (somma, funzione diversa!)</li>
+                        </ul>
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Conclusione:</strong>
+                        <br>Il grafico mostra che per $x \to -\infty$ la funzione si avvicina asintoticamente all'asse $x$.
+                        <br>Sia graficamente che analiticamente abbiamo verificato che:
+                        $$\lim_{x \to -\infty} 2e^{x+1} = 0$$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 32 -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(32)">
+                <span class="exercise-number">Es. 32</span>
+                <span class="exercise-text">Rappresenta graficamente la funzione $y = \left|\frac{1}{x-4}\right|$ e verifica i limiti $\lim_{y \to +\infty} x$ e $\lim_{y \to 0} x = 0$. Deduci poi dal grafico il valore di $\lim_{y \to +\infty} y$ ed esegui la verifica mediante la relativa definizione</span>
+                <span class="toggle-icon" id="icon-32">▼</span>
+            </div>
+            <div class="solution" id="solution-32">
+                <div class="solution-content">
+                    <img src="graph_es32.png" alt="Grafico funzione esercizio 32" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">📐 Costruzione del grafico</div>
+                        <div class="math-block">
+                            $$y = \left|\frac{1}{x-4}\right|$$
+                        </div>
+                        <div class="explanation">
+                            Questa funzione si ottiene dalla funzione base $y = \frac{1}{x}$ con trasformazioni successive.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">1️⃣ Trasformazioni geometriche</div>
+                        
+                        <strong>Funzione base: $f(x) = \frac{1}{x}$</strong>
+                        <div class="explanation">
+                            Iperbole equilatera con:
+                            <ul>
+                                <li>Asintoto verticale: $x = 0$</li>
+                                <li>Asintoto orizzontale: $y = 0$</li>
+                                <li>Rami nel I e III quadrante</li>
+                            </ul>
+                        </div>
+
+                        <strong>Prima trasformazione: $g(x) = \frac{1}{x-4}$</strong>
+                        <div class="explanation">
+                            Traslazione orizzontale di 4 unità a destra:
+                            <ul>
+                                <li>Asintoto verticale si sposta in: $x = 4$</li>
+                                <li>Asintoto orizzontale rimane: $y = 0$</li>
+                            </ul>
+                        </div>
+
+                        <strong>Seconda trasformazione: $y = \left|\frac{1}{x-4}\right|$</strong>
+                        <div class="explanation">
+                            Il valore assoluto rende tutti i valori positivi:
+                            <ul>
+                                <li>Il ramo nel III quadrante (valori negativi) viene riflesso nel II quadrante</li>
+                                <li>Il ramo nel I quadrante rimane invariato</li>
+                                <li>La funzione risultante è sempre $\geq 0$</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">2️⃣ Caratteristiche del grafico</div>
+                        <div class="explanation">
+                            <ul>
+                                <li><strong>Dominio:</strong> $\mathbb{R} - \{4\}$</li>
+                                <li><strong>Codominio:</strong> $(0, +\infty)$ (sempre positivo)</li>
+                                <li><strong>Asintoto verticale:</strong> $x = 4$</li>
+                                <li><strong>Asintoto orizzontale:</strong> $y = 0$</li>
+                                <li><strong>Simmetria:</strong> La funzione non è né pari né dispari, ma i due rami rispetto a $x = 4$ hanno lo stesso andamento</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">3️⃣ Verifica: $\lim_{y \to +\infty} x$</div>
+                        <div class="explanation">
+                            <strong>Nota importante:</strong> Questo esercizio chiede di studiare la funzione <em>inversa</em>, considerando $y$ come variabile indipendente e $x$ come funzione di $y$.
+                            <br><br>
+                            Dalla relazione $y = \left|\frac{1}{x-4}\right|$, ricaviamo $x$ in funzione di $y$:
+                        </div>
+
+                        <div class="math-block">
+                            $$y = \frac{1}{|x-4|}$$
+                        </div>
+
+                        <div class="math-block">
+                            $$|x-4| = \frac{1}{y}$$
+                        </div>
+
+                        <div class="explanation">
+                            Questo dà due soluzioni:
+                        </div>
+
+                        <div class="math-block">
+                            $$x - 4 = \pm\frac{1}{y}$$
+                        </div>
+
+                        <div class="math-block">
+                            $$x = 4 \pm \frac{1}{y}$$
+                        </div>
+
+                        <div class="explanation">
+                            Ora calcoliamo il limite per $y \to +\infty$:
+                        </div>
+
+                        <div class="math-block">
+                            $$\lim_{y \to +\infty} x = \lim_{y \to +\infty} \left(4 \pm \frac{1}{y}\right) = 4 \pm 0 = 4$$
+                        </div>
+
+                        <div class="explanation">
+                            <strong>Interpretazione:</strong> Quando $y$ cresce indefinitamente (ci allontaniamo dall'asse $x$), il valore di $x$ si avvicina a 4, che è proprio l'asintoto verticale. ✓
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">4️⃣ Verifica: $\lim_{y \to 0} x = 0$ (ERRATO nel testo)</div>
+                        <div class="warning">
+                            <strong>⚠️ CORREZIONE:</strong> Il limite indicato nel testo dell'esercizio è sbagliato!
+                        </div>
+
+                        <div class="explanation">
+                            Quando $y \to 0^+$ (la funzione si avvicina all'asse $x$):
+                        </div>
+
+                        <div class="math-block">
+                            $$\lim_{y \to 0^+} x = \lim_{y \to 0^+} \left(4 \pm \frac{1}{y}\right)$$
+                        </div>
+
+                        <div class="explanation">
+                            Poiché $\frac{1}{y} \to +\infty$ quando $y \to 0^+$:
+                        </div>
+
+                        <div class="math-block">
+                            $$x = 4 + \frac{1}{y} \to +\infty \quad \text{oppure} \quad x = 4 - \frac{1}{y} \to -\infty$$
+                        </div>
+
+                        <div class="explanation">
+                            <strong>Interpretazione corretta:</strong> Quando $y \to 0$ (ci avviciniamo all'asintoto orizzontale), $x \to \pm\infty$, non $x \to 0$!
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">5️⃣ Dal grafico: $\lim_{y \to +\infty} y$</div>
+                        <div class="warning">
+                            <strong>⚠️ Attenzione:</strong> Questa domanda non ha senso matematico! Il limite di $y$ per $y \to +\infty$ è ovviamente $+\infty$.
+                            <br><br>
+                            Probabilmente l'esercizio intende chiedere: <strong>"Qual è il comportamento di $y$ all'infinito?"</strong>
+                        </div>
+
+                        <div class="explanation">
+                            Dal grafico osserviamo che:
+                        </div>
+
+                        <div class="math-block">
+                            $$\lim_{x \to \pm\infty} y = \lim_{x \to \pm\infty} \left|\frac{1}{x-4}\right| = 0$$
+                        </div>
+
+                        <div class="explanation">
+                            Questo conferma che $y = 0$ è un asintoto orizzontale.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">6️⃣ Verifica mediante definizione</div>
+                        <div class="explanation">
+                            Verifichiamo che $\lim_{x \to +\infty} \left|\frac{1}{x-4}\right| = 0$:
+                        </div>
+
+                        <div class="math-block">
+                            $$\left|\frac{1}{x-4}\right| < \varepsilon$$
+                        </div>
+
+                        <div class="explanation">
+                            Vogliamo trovare $M$ tale che se $x > M$, allora questa disuguaglianza è verificata.
+                            <br>Per $x > 4$:
+                        </div>
+
+                        <div class="math-block">
+                            $$\frac{1}{x-4} < \varepsilon \quad \Rightarrow \quad x - 4 > \frac{1}{\varepsilon} \quad \Rightarrow \quad x > 4 + \frac{1}{\varepsilon}$$
+                        </div>
+
+                        <div class="explanation">
+                            Quindi, scegliendo $M = 4 + \frac{1}{\varepsilon}$, abbiamo dimostrato il limite. ✓
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>📌 Interpretazione geometrica:</strong>
+                        <ul>
+                            <li>Quando $x \to \pm\infty$: la funzione si avvicina all'asintoto orizzontale $y = 0$</li>
+                            <li>Quando $x \to 4$: la funzione diverge verso $+\infty$ (asintoto verticale)</li>
+                            <li>Il grafico forma una "V" aperta verso l'alto centrata in $x = 4$</li>
+                        </ul>
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Limiti corretti:</strong>
+                        <br>• $\lim_{y \to +\infty} x = 4$ (ci avviciniamo all'asintoto verticale)
+                        <br>• $\lim_{x \to \pm\infty} y = 0$ (ci avviciniamo all'asintoto orizzontale)
+                        <br>• Per $y \to 0^+$: $x \to \pm\infty$ (non $x \to 0$ come scritto nel testo)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 33 (Chi si è già ammalato) -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(33)">
+                <span class="exercise-number">Es. 33</span>
+                <span class="exercise-text">Il grafico rappresenta una previsione della diffusione di una malattia in Sardegna dopo una vaccinazione. Sull'asse delle ordinate si legge il numero di individui infetti $I(t)$, su quella delle ascisse il tempo in anni. Osserva il grafico e deduci se le affermazioni sono vere o false: a. $\lim_{t \to 0} I(t) = 0$; b. Il numero massimo di infetti è 150; c. $\lim_{t \to +\infty} I(t) = 0$; d. Il numero di individui infetti tende a passare oltre il tempo</span>
+                <span class="toggle-icon" id="icon-33">▼</span>
+            </div>
+            <div class="solution" id="solution-33">
+                <div class="solution-content">
+                    <img src="graph_es33.png" alt="Grafico diffusione malattia" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">📊 Analisi del grafico</div>
+                        <div class="explanation">
+                            Il grafico mostra l'andamento del numero di infetti $I(t)$ in funzione del tempo $t$ (in anni) dopo una campagna di vaccinazione.
+                            <br><br>
+                            <strong>Caratteristiche visibili:</strong>
+                            <ul>
+                                <li>Il grafico inizia vicino a 50 infetti al tempo $t = 0$</li>
+                                <li>Cresce rapidamente raggiungendo un massimo intorno a $t = 5$ anni</li>
+                                <li>Il picco massimo sembra essere intorno a 150 infetti</li>
+                                <li>Dopo il picco, il numero di infetti decresce gradualmente</li>
+                                <li>Per $t$ grande, il grafico si avvicina all'asse orizzontale (50 infetti)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">a. $\lim_{t \to 0} I(t) = 0$</div>
+                        <div class="explanation">
+                            <strong>Analisi:</strong> Osservando il grafico all'origine ($t = 0$), vediamo che:
+                        </div>
+                        <div class="math-block">
+                            $$I(0) \approx 50$$
+                        </div>
+                        <div class="explanation">
+                            Il grafico non passa per l'origine, ma parte da un valore di circa 50 infetti.
+                            <br><br>
+                            <strong>❌ FALSO</strong>
+                            <br><br>
+                            <em>Interpretazione:</em> Al momento iniziale (subito dopo la vaccinazione) ci sono già circa 50 persone infette, non zero.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">b. Il numero massimo di infetti è 150</div>
+                        <div class="explanation">
+                            <strong>Analisi:</strong> Osservando il grafico, il picco massimo della curva si trova intorno a $t = 5$ anni, e raggiunge un valore di circa:
+                        </div>
+                        <div class="math-block">
+                            $$\max I(t) \approx 150$$
+                        </div>
+                        <div class="explanation">
+                            <strong>✅ VERO</strong>
+                            <br><br>
+                            <em>Interpretazione:</em> Il numero massimo di persone simultaneamente infette è circa 150, raggiunto circa 5 anni dopo la vaccinazione.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">c. $\lim_{t \to +\infty} I(t) = 0$</div>
+                        <div class="explanation">
+                            <strong>Analisi:</strong> Osservando il comportamento del grafico per tempi molto grandi:
+                        </div>
+                        <div class="math-block">
+                            $$\lim_{t \to +\infty} I(t) \approx 50$$
+                        </div>
+                        <div class="explanation">
+                            Il grafico si avvicina asintoticamente a $y = 50$, non a $y = 0$.
+                            <br><br>
+                            <strong>❌ FALSO</strong>
+                            <br><br>
+                            <em>Interpretazione:</em> Con il passare del tempo, il numero di infetti si stabilizza intorno a 50 persone (un livello endemico), non si azzera completamente. Questo significa che la malattia non viene eradicata, ma raggiunge un equilibrio.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">d. Il numero di individui infetti tende a passare oltre il tempo</div>
+                        <div class="warning">
+                            <strong>⚠️ Interpretazione dell'affermazione:</strong> L'affermazione "tende a passare" è ambigua. Probabilmente significa "tende a diminuire/scomparire con il passare del tempo".
+                        </div>
+                        <div class="explanation">
+                            <strong>Analisi:</strong> Dal grafico osserviamo che:
+                            <ul>
+                                <li>Inizialmente (0-5 anni): il numero di infetti <strong>aumenta</strong></li>
+                                <li>Dopo il picco (5+ anni): il numero di infetti <strong>diminuisce</strong></li>
+                                <li>A lungo termine: il numero si stabilizza a 50, non scompare</li>
+                            </ul>
+                            
+                            Se l'affermazione significa "scompare completamente": <strong>❌ FALSO</strong>
+                            <br>Se significa "diminuisce dopo il picco": <strong>✅ VERO</strong>
+                            <br><br>
+                            <em>Interpretazione più probabile:</em> Data la formulazione e il contesto, l'affermazione è probabilmente <strong>FALSA</strong>, perché il numero di infetti non "passa" (scompare), ma rimane stabilmente intorno a 50.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">🔬 Modellizzazione matematica</div>
+                        <div class="explanation">
+                            Questo tipo di grafico è tipico dei modelli epidemiologici (modelli SIR o SEIR). Le caratteristiche osservate sono:
+                            <ul>
+                                <li><strong>Fase iniziale:</strong> Crescita esponenziale degli infetti</li>
+                                <li><strong>Fase del picco:</strong> Massimo numero di casi simultanei</li>
+                                <li><strong>Fase di declino:</strong> Diminuzione per immunità acquisita o vaccinazione</li>
+                                <li><strong>Fase endemica:</strong> Stabilizzazione a un livello residuo</li>
+                            </ul>
+                            
+                            L'asintoto orizzontale a $I(t) = 50$ rappresenta il livello endemico della malattia.
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Significato pratico:</strong>
+                        <ul>
+                            <li><strong>$I(0) = 50$:</strong> Al momento della vaccinazione ci sono già 50 infetti</li>
+                            <li><strong>Massimo 150:</strong> La capacità sanitaria deve gestire fino a 150 casi</li>
+                            <li><strong>Limite 50:</strong> La vaccinazione non eradica la malattia, ma la mantiene sotto controllo con 50 casi stabili</li>
+                        </ul>
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Risposte:</strong>
+                        <br>a. <strong>FALSO</strong> - $\lim_{t \to 0} I(t) = 50 \neq 0$
+                        <br>b. <strong>VERO</strong> - Il massimo è circa 150 infetti
+                        <br>c. <strong>FALSO</strong> - $\lim_{t \to +\infty} I(t) = 50 \neq 0$
+                        <br>d. <strong>FALSO</strong> - Il numero di infetti si stabilizza, non scompare
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Esercizio 34 (Scorte in magazzino) -->
+        <div class="exercise">
+            <div class="exercise-header" onclick="toggleSolution(34)">
+                <span class="exercise-number">Es. 34</span>
+                <span class="exercise-text">La funzione $y = s(t)$ indica il livello delle scorte di materiale per calcestruzzo nel magazzino di un'impresa edile a partire dal 1 luglio. Osserva il grafico: sull'asse delle ordinate puoi leggere il livello delle scorte di materiale, in tonnellate, e sull'asse delle ascisse il tempo, in giorni. a. Descrivi l'andamento delle scorte al variare di $t$. b. Che cosa puoi dire delle scorte a 72 di $s(t)$? E dei limiti destro e sinistro? c. Verifica, applicando la definizione, il limite sinistro per $t \to 72$</span>
+                <span class="toggle-icon" id="icon-34">▼</span>
+            </div>
+            <div class="solution" id="solution-34">
+                <div class="solution-content">
+                    <img src="graph_es34.png" alt="Grafico scorte magazzino" class="graph-image">
+                    
+                    <div class="step">
+                        <div class="step-title">a. Descrizione dell'andamento delle scorte</div>
+                        <div class="explanation">
+                            Analizzando il grafico, possiamo dividere l'andamento in diverse fasi:
+                        </div>
+                        
+                        <strong>📉 Fase 1 (da $t = 0$ a $t = 24$):</strong>
+                        <div class="explanation">
+                            <ul>
+                                <li>Le scorte partono da circa 10 tonnellate</li>
+                                <li>Diminuiscono linearmente (consumo costante)</li>
+                                <li>Raggiungono quasi 0 tonnellate al giorno 24</li>
+                                <li><em>Interpretazione:</em> Periodo di utilizzo del materiale senza rifornimenti</li>
+                            </ul>
+                        </div>
+
+                        <strong>📈 Giorno 24 (rifornimento):</strong>
+                        <div class="explanation">
+                            <ul>
+                                <li>Brusco aumento verticale delle scorte</li>
+                                <li>Le scorte passano da ~0 a ~10 tonnellate</li>
+                                <li><em>Interpretazione:</em> Arrivo di un nuovo carico di materiale</li>
+                            </ul>
+                        </div>
+
+                        <strong>📉 Fase 2 (da $t = 24$ a $t = 48$):</strong>
+                        <div class="explanation">
+                            <ul>
+                                <li>Nuovo ciclo di diminuzione lineare</li>
+                                <li>Stesso ritmo della fase 1</li>
+                                <li>Le scorte tornano quasi a 0 al giorno 48</li>
+                            </ul>
+                        </div>
+
+                        <strong>📈 Giorno 48 (secondo rifornimento):</strong>
+                        <div class="explanation">
+                            <ul>
+                                <li>Altro rifornimento di ~10 tonnellate</li>
+                                <li>Il pattern si ripete</li>
+                            </ul>
+                        </div>
+
+                        <strong>📉 Fase 3 (da $t = 48$ a $t = 72$):</strong>
+                        <div class="explanation">
+                            <ul>
+                                <li>Terzo ciclo di consumo</li>
+                                <li>Le scorte diminuiscono fino a circa 5 tonnellate al giorno 72</li>
+                            </ul>
+                        </div>
+
+                        <strong>🔄 Pattern periodico:</strong>
+                        <div class="math-block">
+                            $$\text{Periodo} = 24 \text{ giorni}$$
+                        </div>
+                        <div class="explanation">
+                            Il grafico mostra una <strong>funzione periodica a dente di sega</strong>, con rifornimenti ogni 24 giorni.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">b. Analisi al giorno $t = 72$</div>
+                        
+                        <strong>Valore di $s(72)$:</strong>
+                        <div class="explanation">
+                            Dal grafico, al giorno 72:
+                        </div>
+                        <div class="math-block">
+                            $$s(72) \approx 5 \text{ tonnellate}$$
+                        </div>
+                        <div class="explanation">
+                            <em>Interpretazione:</em> Dopo 72 giorni dal 1 luglio, rimangono circa 5 tonnellate di materiale in magazzino.
+                        </div>
+
+                        <strong>Limite sinistro: $\lim_{t \to 72^-} s(t)$</strong>
+                        <div class="explanation">
+                            Avvicinandosi al giorno 72 da sinistra (giorni precedenti):
+                        </div>
+                        <div class="math-block">
+                            $$\lim_{t \to 72^-} s(t) = 5 \text{ tonnellate}$$
+                        </div>
+                        <div class="explanation">
+                            Le scorte diminuiscono linearmente e tendono a 5 tonnellate.
+                        </div>
+
+                        <strong>Limite destro: $\lim_{t \to 72^+} s(t)$</strong>
+                        <div class="explanation">
+                            Osservando il grafico immediatamente dopo il giorno 72, sembra esserci un nuovo rifornimento:
+                        </div>
+                        <div class="math-block">
+                            $$\lim_{t \to 72^+} s(t) \approx 10 \text{ tonnellate}$$
+                        </div>
+                        <div class="explanation">
+                            <em>Interpretazione:</em> Al giorno 72 (o subito dopo) arriva un nuovo carico che riporta le scorte a 10 tonnellate.
+                        </div>
+
+                        <strong>Continuità in $t = 72$:</strong>
+                        <div class="explanation">
+                            Poiché:
+                        </div>
+                        <div class="math-block">
+                            $$\lim_{t \to 72^-} s(t) = 5 \neq 10 \approx \lim_{t \to 72^+} s(t)$$
+                        </div>
+                        <div class="explanation">
+                            La funzione ha una <strong>discontinuità di prima specie (salto)</strong> in $t = 72$.
+                            <br>Il salto è causato dal rifornimento.
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">c. Verifica del limite sinistro per $t \to 72$ mediante definizione</div>
+                        
+                        <div class="explanation">
+                            Vogliamo dimostrare che:
+                        </div>
+                        <div class="math-block">
+                            $$\lim_{t \to 72^-} s(t) = 5$$
+                        </div>
+
+                        <strong>Definizione di limite sinistro:</strong>
+                        <div class="explanation">
+                            $\lim_{t \to 72^-} s(t) = 5$ significa che:
+                            <br><em>Per ogni $\varepsilon > 0$, esiste $\delta > 0$ tale che se $72 - \delta < t < 72$, allora $|s(t) - 5| < \varepsilon$</em>
+                        </div>
+
+                        <strong>Determinazione della funzione:</strong>
+                        <div class="explanation">
+                            Nell'intervallo $[48, 72]$ (terzo ciclo), le scorte diminuiscono linearmente da 10 a 5 tonnellate.
+                            <br>La funzione è quindi:
+                        </div>
+                        <div class="math-block">
+                            $$s(t) = 10 - \frac{5}{24}(t - 48) \quad \text{per } 48 \leq t \leq 72$$
+                        </div>
+
+                        <div class="explanation">
+                            Semplifichiamo:
+                        </div>
+                        <div class="math-block">
+                            $$s(t) = 10 - \frac{5t}{24} + \frac{5 \cdot 48}{24} = 10 - \frac{5t}{24} + 10 = 20 - \frac{5t}{24}$$
+                        </div>
+
+                        <strong>Verifica:</strong>
+                        <div class="explanation">
+                            Controlliamo che per $t = 72$:
+                        </div>
+                        <div class="math-block">
+                            $$s(72) = 20 - \frac{5 \cdot 72}{24} = 20 - \frac{360}{24} = 20 - 15 = 5 \quad \checkmark$$
+                        </div>
+
+                        <strong>Applicazione della definizione:</strong>
+                        <div class="explanation">
+                            Dobbiamo verificare che $|s(t) - 5| < \varepsilon$ per $t$ vicino a 72 da sinistra:
+                        </div>
+                        <div class="math-block">
+                            $$\left|20 - \frac{5t}{24} - 5\right| < \varepsilon$$
+                        </div>
+                        <div class="math-block">
+                            $$\left|15 - \frac{5t}{24}\right| < \varepsilon$$
+                        </div>
+                        <div class="math-block">
+                            $$\left|\frac{5(72 - t)}{24}\right| < \varepsilon$$
+                        </div>
+                        <div class="math-block">
+                            $$\frac{5|72 - t|}{24} < \varepsilon$$
+                        </div>
+                        <div class="math-block">
+                            $$|72 - t| < \frac{24\varepsilon}{5}$$
+                        </div>
+
+                        <div class="explanation">
+                            Quindi, scegliendo $\delta = \frac{24\varepsilon}{5}$, abbiamo:
+                            <br>Se $72 - \delta < t < 72$, allora $|s(t) - 5| < \varepsilon$.
+                            <br><br>
+                            Questo dimostra rigorosamente che $\lim_{t \to 72^-} s(t) = 5$. ✓
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Modellizzazione del problema:</strong>
+                        <br>Questo è un tipico problema di gestione delle scorte (inventory management). La funzione a dente di sega rappresenta:
+                        <ul>
+                            <li><strong>Discese lineari:</strong> Consumo costante di materiale</li>
+                            <li><strong>Salti verticali:</strong> Rifornimenti periodici</li>
+                            <li><strong>Periodo 24 giorni:</strong> Frequenza ottimale di riordino</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Punti di discontinuità:</strong> Ai giorni 24, 48, 72, ... la funzione presenta discontinuità di prima specie (salti). Questi corrispondono ai momenti di rifornimento.
+                    </div>
+
+                    <div class="result">
+                        ✅ <strong>Risposte:</strong>
+                        <br>a. La funzione ha andamento periodico "a dente di sega" con periodo 24 giorni: discese lineari (consumo) seguite da salti verticali (rifornimenti)
+                        <br><br>b. $s(72) = 5$ tonnellate; $\lim_{t \to 72^-} s(t) = 5$ tonnellate; $\lim_{t \to 72^+} s(t) = 10$ tonnellate (discontinuità)
+                        <br><br>c. Dimostrato mediante definizione con $\delta = \frac{24\varepsilon}{5}$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSolution(exerciseNumber) {
+            const solution = document.getElementById(`solution-${exerciseNumber}`);
+            const icon = document.getElementById(`icon-${exerciseNumber}`);
+            
+            solution.classList.toggle('show');
+            icon.classList.toggle('rotated');
+        }
+
+        // Configurazione MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+</body>
+</html>
